@@ -45,7 +45,8 @@ sub init {
     $myHost=`hostname`;
     chomp($myHost);
     $checkPointPath="/var/db/newrelic-infra/custom-integrations/";
-    $rpmId="1779935";
+    $rpmId="CHANGE-ME";
+    $insightsKey="CHANGE-ME";
     debugOut($checkPointFile);
     $header="{\"name\": \"action-engine\", \"protocol_version\": \"1\", \"integration_version\": \"0.0.1\",\"metrics\": [";
     $payload = $payload . "{\"event_type\": \"$eventtype\",";
@@ -60,7 +61,7 @@ sub init {
 sub getAlertIncidents {
     $sub="getAlertIncidents";
     if ($debug) { debugOut("SUBROUTINE: getAlertIncidents"); }
-    $actionEvents= `curl -s -H "Accept: application/json" -H "X-Query-Key: NRIQ-gbqSUQXTDTnzQyyaYosU545rVtXxcCgL" "https://insights-api.newrelic.com/v1/accounts/$rpmId/query?nrql=SELECT%20incident_id%2C%20action_policy_exec%2C%20details%20FROM%20Alerts%20where%20action_policy%20%3D%27true%27%20since%2015%20minutes%20ago"`;
+    $actionEvents= `curl -s -H "Accept: application/json" -H "X-Query-Key: $insightsKey" "https://insights-api.newrelic.com/v1/accounts/$rpmId/query?nrql=SELECT%20incident_id%2C%20action_policy_exec%2C%20details%20FROM%20Alerts%20where%20action_policy%20%3D%27true%27%20since%2015%20minutes%20ago"`;
     $decodedJSON=decode_json($actionEvents);
 #    print Dumper($decodedJSON);
     $eventData=Dumper($decodedJSON);
