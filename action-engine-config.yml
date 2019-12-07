@@ -1,0 +1,7 @@
+integration_name: action-engine 
+instances:
+  - name: action-engine 
+    command: metrics
+    arguments:
+    labels:
+      environment: production

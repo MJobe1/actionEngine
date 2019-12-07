@@ -1,0 +1,9 @@
+name: action-engine
+description: Executes commands or scripts in response to an Incident
+protocol_version: 1
+commands:
+  metrics:
+    command:
+      - actionEngine.pl 
+    prefix: integration/actionEngine
+    interval: 60
